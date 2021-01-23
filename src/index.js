@@ -1,4 +1,4 @@
-import express from 'express';
+import './app.database';
 import app from './app.module'
 
 const PORT = 3000;
