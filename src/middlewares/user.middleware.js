@@ -1,4 +1,4 @@
-import User from '../../../../models/user.models';
+import User from './../models/user.models';
 
 export const check_username_duplicated = async(request, response, next) => {
     try {

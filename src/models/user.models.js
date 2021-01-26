@@ -1,11 +1,14 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from "bcryptjs";
+import { DEFAULT_STATUS } from '../app.config'
+import UserStatus from './user.status.models';
 
 const UserSchema = new Schema({
     username: { type: String, unique: true, required: true },
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    status: { type: Schema.Types.ObjectId, ref: "user_status", required: true }
 });
 
 UserSchema.statics.encryptPassword = async(password) => {
@@ -14,6 +17,9 @@ UserSchema.statics.encryptPassword = async(password) => {
 };
 UserSchema.statics.comparePassword = async(password, receivedPassword) => {
     return await bcrypt.compare(password, receivedPassword)
+}
+UserSchema.statics.statusDefault = async() => {
+    return await UserStatus.findOne({ name: DEFAULT_STATUS[0] })
 }
 
 export default model("user", UserSchema);

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="background-color: #F4F2F2; font-family: Arial, Helvetica, sans-serif; color: black;">
+    <div style="width: 80%; background-color: white; position: relative; left: 10% ;padding: 2%; box-sizing: border-box; text-align: justify;">
+        <h1 style="text-align: center;">Bienvenido a Softfile</h1>
+        <p>Este correo a sido registrado y asociado al usuario {{ fullname }} con el nombre {{ username }}, si fue usted por favor haga click siguiente boton para verificar su identidad.</p>
+        <form action="http://localhost:3000/api/v1/email/validate" method="POST">
+            <input value="{{ email_id }}" name="email_id" type="hidden">
+            <input value="{{ redirectTo }}" name="redirectTo" type="hidden">
+            <button class="btn" style="width: 100%; padding: 2%; background-color: teal; outline: none; border: none; color: white; text-transform: uppercase; font-size: larger; font-weight: bolder;">
+                    Validar correo electronico <span class="badge badge-primary"></span>
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>
