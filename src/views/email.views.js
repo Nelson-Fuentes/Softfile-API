@@ -1,4 +1,4 @@
-import EmailController from '../controllers/email.controller';
+import * as EmailController from '../controllers/email.controller';
 
 export const validate_email = async(request, response) => {
     const { email_id, redirectTo } = request.body;
