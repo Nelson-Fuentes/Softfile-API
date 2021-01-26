@@ -3,7 +3,7 @@ import * as UserController from '../controllers/user.controller';
 
 export const create_user = async(request, response) => {
     try {
-        const { username, firstname, lastname, password, email, redirectTo } = request.body;
+        const { username, firstname, lastname, password, email, redirectTo, redirectError } = request.body;
         const user = await UserController.create_user(username, firstname, lastname, password);
         const email_saved = await EmailController.create_email(email, user, redirectTo);
 
