@@ -11,7 +11,6 @@ export const validate_email = async(request, response) => {
         } else {
             let email_id = decoded.email_id;
             let redirectTo = decoded.redirectTo;
-            let redirectError = decoded.redirectError;
             try {
                 await EmailController.validate_email(email_id);
             } catch (error) {
