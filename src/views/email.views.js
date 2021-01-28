@@ -7,16 +7,21 @@ export const validate_email = async(request, response) => {
     const token = request.params.token;
     await JWT.verify(token, process.env.SECRET_KEY_EMAIL_CONFIRM, async function(err, decoded) {
         if (err) {
-            response.redirect(process.env.CONFIRMATION_EMAIL_ERROR);
+            response.status(400).json({
+                message: 'Ha pasado el tiempo limite y su solicitud a expirado'
+            });
         } else {
             let email_id = decoded.email_id;
-            let redirectTo = decoded.redirectTo;
             try {
                 await EmailController.validate_email(email_id);
+                response.status(200).json({
+                    message: 'Correo electronico validado.'
+                });
             } catch (error) {
-                console.log(error)
-            } finally {
-                response.redirect(redirectTo);
+                response.status(500).json({
+                    message: 'Error en el servidor'
+                });
+                console.error(error);
             }
         }
     });

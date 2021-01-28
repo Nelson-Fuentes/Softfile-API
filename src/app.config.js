@@ -1,6 +1,6 @@
 import UserStatus from './models/user.status.models';
 
-export const DEFAULT_STATUS = ['No Verificado', 'Activo', 'Inactive', 'Eliminado'];
+export const DEFAULT_STATUS = ['No Verificado', 'Activo', 'Inactivo', 'Eliminado'];
 
 
 export const creat_default_user_status = async() => {

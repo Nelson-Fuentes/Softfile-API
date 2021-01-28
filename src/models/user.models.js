@@ -22,4 +22,8 @@ UserSchema.statics.statusDefault = async() => {
     return await UserStatus.findOne({ name: DEFAULT_STATUS[0] })
 }
 
+UserSchema.statics.statusActive = async() => {
+    return await UserStatus.findOne({ name: DEFAULT_STATUS[1] })
+}
+
 export default model("user", UserSchema);
