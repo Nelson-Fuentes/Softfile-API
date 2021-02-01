@@ -4,6 +4,6 @@ import * as EmailMiddelwares from '../../../middlewares/email.middleware'
 
 const router = Router();
 
-//router.post('/reset', [EmailMiddelwares.verify_email_registred, EmailMiddelwares.verify_email_validated], AuthViews.reset_password_request);
-
+router.post('/reset', [EmailMiddelwares.verify_email_registred], AuthViews.reset_password_request);
+router.post('/password/:token', AuthViews.reset_password_action);
 export default router;
