@@ -4,6 +4,7 @@ import JWT from 'jsonwebtoken';
 import { config } from 'dotenv';
 import * as EmailModule from '../app.email';
 import * as AuthController from '../controllers/auth.controller';
+import { request } from 'express';
 
 config();
 
@@ -46,4 +47,15 @@ export const reset_password_action = async(request, response) => {
             }
         }
     });
+}
+
+export const authentiction = async(request, response) => {
+    const { username, password } = request.body;
+    const user = await AuthController.authentication(username, password);
+    if (user) {
+        const token = JWT.sign({ _id: user._id }, process.env.SECRET_KEY_AUTHENTICATION, { expiresIn: '30d' });
+        response.status(200).json({ token })
+    } else {
+        response.status(400).json({ message: 'Usuario no coincide con contraseña' })
+    }
 }
