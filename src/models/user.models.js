@@ -26,4 +26,12 @@ UserSchema.statics.statusActive = async() => {
     return await UserStatus.findOne({ name: DEFAULT_STATUS[1] })
 }
 
+UserSchema.statics.statusInactive = async() => {
+    return await UserStatus.findOne({ name: DEFAULT_STATUS[2] })
+}
+
+UserSchema.statics.statusDeleted = async() => {
+    return await UserStatus.findOne({ name: DEFAULT_STATUS[3] })
+}
+
 export default model("user", UserSchema);

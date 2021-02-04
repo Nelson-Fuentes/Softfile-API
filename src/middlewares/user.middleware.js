@@ -15,12 +15,12 @@ export const check_username_duplicated = async(request, response, next) => {
 
 export const verify_username_exists = async(request, response, next) => {
     try {
-
-        const user = await User.findOne({ username: request.body.username });
+        const active_status = await User.statusActive();
+        const user = await User.findOne({ username: request.body.username, status: active_status });
         if (user) {
             next()
         } else {
-            return response.status(400).json({ message: 'El usuario ' + request.body.username + ' no esta registrado.' })
+            return response.status(400).json({ message: 'El usuario ' + request.body.username + ' no esta registrado o tiene su cuenta activa' })
         }
     } catch (error) {
         console.error(error);

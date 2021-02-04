@@ -49,7 +49,7 @@ export const reset_password_action = async(request, response) => {
     });
 }
 
-export const authentiction = async(request, response) => {
+export const authentication = async(request, response) => {
     const { username, password } = request.body;
     const user = await AuthController.authentication(username, password);
     if (user) {
