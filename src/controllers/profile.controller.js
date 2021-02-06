@@ -18,7 +18,7 @@ export const show_profile = async(profile) => {
         user: {
             _id: user._id,
             username: user.username,
-            firstname: user.username,
+            firstname: user.firstname,
             lastname: user.lastname
         },
         image: profile.image,
