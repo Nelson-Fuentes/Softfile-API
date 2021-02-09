@@ -7,9 +7,10 @@ import cors from 'cors';
 
 const app = express();
 app.use(cors());
-app.use(BodyParser.urlencoded({ extended: false }))
-app.use(BodyParser.json())
+app.use(BodyParser.json({ limit: '50mb' }));
+app.use(BodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(morgan('dev'));
 app.use('', AppRouting);
+app.use(express.static(__dirname + "/public"));
 
 export default app

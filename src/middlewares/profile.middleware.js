@@ -1,6 +1,6 @@
 import Degree from '../models/deggree.models'
 
-export const verify_exists_degree_id = async(request, response) => {
+export const verify_exists_degree_id = async(request, response, next) => {
     const degree_id = request.body.degree_id;
     if (!degree_id) next();
     else {
