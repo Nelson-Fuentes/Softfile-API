@@ -1,8 +1,17 @@
 import { config } from 'dotenv';
+import { request, response } from 'express';
 import JWT from 'jsonwebtoken';
 import User from '../models/user.models';
 
 config();
+
+export const verify_a_token_was_sended = async(request, response, next) => {
+    if (request.headers.authorization) {
+        next()
+    } else {
+        response.json(401).json('No se envio un token de sesion');
+    }
+}
 
 export const verify_token_expires = async(request, response, next) => {
     const token = request.headers.authorization.split('token ')[1];
