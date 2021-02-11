@@ -1,5 +1,8 @@
 import UserStatus from './models/user.status.models';
 import Degree from './models/deggree.models'
+import fs from 'fs';
+import Country from './models/country.models';
+import City from './models/city.models';
 
 export const DEFAULT_STATUS = ['No Verificado', 'Activo', 'Inactivo', 'Eliminado'];
 export const DEFAULT_DEGREES = [
@@ -44,5 +47,30 @@ export const create_default_degrees = async() => {
             const degree_saved = await degree_unsaved.save();
             console.info('Default degree was saved: ' + degree_saved);
         }
+    })
+}
+
+export const create_default_locations = async() => {
+    const rawData = await fs.readFileSync('locations.json');
+    const countries = JSON.parse(rawData);
+    countries.forEach(async(country) => {
+        const country_name = country.name;
+        let country_saved = await Country.findOne({ name: country_name });
+        if (!country_saved) {
+            country_saved = new Country({ name: country_name });
+            country_saved = await country_saved.save();
+            console.log('Country ' + country_saved + ' was saved');
+        }
+        const country_states = country.states;
+        country_states.forEach(async(state) => {
+            const state_name = state.name;
+            let city_saved = await City.findOne({ name: state_name, country: country_saved._id });
+            if (!city_saved) {
+                city_saved = new City({ name: state_name, country: country_saved._id });
+                city_saved = await city_saved.save();
+                console.log(city_saved)
+                console.log('City ' + city_saved + ' from ' + country_saved.name + ' was saved')
+            }
+        });
     })
 }
