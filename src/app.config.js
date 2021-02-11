@@ -60,17 +60,17 @@ export const create_default_locations = async() => {
             country_saved = new Country({ name: country_name });
             country_saved = await country_saved.save();
             console.log('Country ' + country_saved + ' was saved');
+            const country_states = country.states;
+            country_states.forEach(async(state) => {
+                const state_name = state.name;
+                let city_saved = await City.findOne({ name: state_name, country: country_saved._id });
+                if (!city_saved) {
+                    city_saved = new City({ name: state_name, country: country_saved._id });
+                    city_saved = await city_saved.save();
+                    console.log(city_saved)
+                    console.log('City ' + city_saved + ' from ' + country_saved.name + ' was saved')
+                }
+            });
         }
-        const country_states = country.states;
-        country_states.forEach(async(state) => {
-            const state_name = state.name;
-            let city_saved = await City.findOne({ name: state_name, country: country_saved._id });
-            if (!city_saved) {
-                city_saved = new City({ name: state_name, country: country_saved._id });
-                city_saved = await city_saved.save();
-                console.log(city_saved)
-                console.log('City ' + city_saved + ' from ' + country_saved.name + ' was saved')
-            }
-        });
     })
 }
