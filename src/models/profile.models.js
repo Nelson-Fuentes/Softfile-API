@@ -5,7 +5,9 @@ const ProfileSchema = new Schema({
     image: { type: String, unique: true },
     wallpaper: { type: String, unique: true },
     description: { type: String },
-    degree: { type: Schema.Types.ObjectId, ref: "profile" }
+    degree: { type: Schema.Types.ObjectId, ref: "profile" },
+    location: { type: Schema.Types.ObjectId, ref: "city" }
 });
+
 
 export default model("profile", ProfileSchema);

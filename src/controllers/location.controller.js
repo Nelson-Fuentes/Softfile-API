@@ -17,12 +17,17 @@ export const get_city = async(id) => {
 }
 
 export const show_city = async(city) => {
-    const country = await get_country(city.country);
-    return {
-        _id: city._id,
-        name: city.name,
-        country: country
+    if (city) {
+        const country = await get_country(city.country);
+        return {
+            _id: city._id,
+            name: city.name,
+            country: country
+        }
+    } else {
+        return null;
     }
+
 }
 
 export const show_country = async(country) => {

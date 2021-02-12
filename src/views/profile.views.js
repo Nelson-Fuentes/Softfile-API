@@ -33,7 +33,7 @@ export const update_profile = async(request, response) => {
         }
         const profile = await ProfileController.update_profile(user._id,
             data.firstname, data.lastname, url_image, url_wallpaper,
-            data.description, data.degree_id);
+            data.description, data.degree_id, data.location);
         response.json(await ProfileController.show_profile(profile));
     } else {
         response.json(404).json('no se encontro usuario')
