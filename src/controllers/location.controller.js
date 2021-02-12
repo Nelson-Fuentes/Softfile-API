@@ -12,7 +12,7 @@ export const get_country = async(id) => {
 }
 
 export const get_city = async(id) => {
-    const city = await City.findById(city);
+    const city = await City.findById(id);
     return city;
 }
 

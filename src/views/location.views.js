@@ -11,3 +11,10 @@ export const get_country = async(request, response) => {
     const country = await LocationController.get_country(id);
     response.json(await LocationController.show_country(country));
 }
+
+export const get_city = async(request, response) => {
+    const id = request.params.id;
+    const city = await LocationController.get_city(id);
+    if (city) response.json(await LocationController.show_city(city));
+    else response.status(404).json('Localizacion no encontrada');
+}
