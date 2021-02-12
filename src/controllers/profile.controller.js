@@ -15,7 +15,6 @@ export const get_profile = async(user_id) => {
 }
 
 export const show_profile = async(profile) => {
-    console.log(profile)
     const user = await User.findById(profile.user);
     const degree = await Degree.findById(profile.degree);
     const location = await City.findById(profile.location);
