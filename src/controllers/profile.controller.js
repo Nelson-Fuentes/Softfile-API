@@ -42,7 +42,6 @@ export const update_profile = async(user_id, firstname, lastname, image, wallpap
     if (description) profile.description = description;
     if (degree_id) profile.degree = degree_id;
     if (location) profile.location = location;
-    console.log(profile)
     const profile_updated = await profile.save();
     return profile_updated;
 }
