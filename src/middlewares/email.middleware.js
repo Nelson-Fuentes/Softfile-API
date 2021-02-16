@@ -5,12 +5,13 @@ import * as AuthController from '../controllers/auth.controller'
 export const check_email_duplicated = async(request, response, next) => {
     try {
         const email = await Email.findOne({ adress: request.body.email, validated: true });
-        if (email) {
-            return response.status(400).json({ message: "Dirección de correo electronico ya esta en uso." });
+        const email_adress = await Email.findOne({ adress: request.body.adress, validated: true });
+        if (email || email_adress) {
+            return response.status(400).json("Dirección de correo electronico ya esta en uso.");
         }
         next();
     } catch (error) {
-        response.status(500).json({ message: "Servidor Error" })
+        response.status(500).json("Servidor Error")
     }
 }
 
