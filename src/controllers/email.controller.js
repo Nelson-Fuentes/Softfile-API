@@ -65,3 +65,14 @@ export const delete_email = async(email_id) => {
         return undefined;
     }
 }
+
+export const show_email = (email) => {
+    const data = {
+        _id: email._id,
+        adress: email.adress,
+        validated: email.validated,
+        user: email.user._id,
+        _v: email.v
+    }
+    return data;
+}

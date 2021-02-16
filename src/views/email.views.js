@@ -48,7 +48,7 @@ export const create_email = async(request, response) => {
         const { adress, redirectTo } = request.body;
         const user = await AuthController.get_user(token);
         const email = await EmailController.create_email(adress, user, redirectTo);
-        response.json(email);
+        response.json(EmailController.show_email(email));
     } catch (err) {
         response.status(500).json('Error en el servidor');
         console.log(err);
