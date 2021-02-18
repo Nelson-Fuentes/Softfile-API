@@ -11,6 +11,7 @@ database_connection.then(async(db) => {
     await AppConfig.create_default_user_status();
     await AppConfig.create_default_degrees();
     await AppConfig.create_default_locations();
+    await AppConfig.create_default_code_number();
     app.listen(PORT, () => {
         console.log('Server listen on port', PORT);
     })

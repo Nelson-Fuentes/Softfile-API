@@ -3,6 +3,7 @@ import Degree from './models/deggree.models'
 import fs from 'fs';
 import Country from './models/country.models';
 import City from './models/city.models';
+import PhoneCode from './models/phone.codes.models';
 
 export const DEFAULT_STATUS = ['No Verificado', 'Activo', 'Inactivo', 'Eliminado'];
 export const DEFAULT_DEGREES = [
@@ -67,10 +68,26 @@ export const create_default_locations = async() => {
                 if (!city_saved) {
                     city_saved = new City({ name: state_name, country: country_saved._id });
                     city_saved = await city_saved.save();
-                    console.log(city_saved)
                     console.log('City ' + city_saved + ' from ' + country_saved.name + ' was saved')
                 }
             });
         }
     })
+}
+
+export const create_default_code_number = async() => {
+    const rawData = await fs.readFileSync('phone_codes.json');
+    const codes = JSON.parse(rawData);
+    await codes.forEach(async(code) => {
+        let phone_code_saved = await PhoneCode.findOne({ code: code.phone_code });
+        if (!phone_code_saved && (code.phone_code && code.iso2 && code.iso3)) {
+            phone_code_saved = new PhoneCode({
+                code: code.phone_code,
+                iso2: code.iso2,
+                iso3: code.iso3
+            });
+            phone_code_saved = await phone_code_saved.save();
+            console.log('The phone code: ' + phone_code_saved + ' was saved.')
+        }
+    });
 }
