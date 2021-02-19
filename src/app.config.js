@@ -4,6 +4,7 @@ import fs from 'fs';
 import Country from './models/country.models';
 import City from './models/city.models';
 import PhoneCode from './models/phone.codes.models';
+import Socialnet from './models/social.net.models'
 
 export const DEFAULT_STATUS = ['No Verificado', 'Activo', 'Inactivo', 'Eliminado'];
 export const DEFAULT_DEGREES = [
@@ -27,6 +28,35 @@ export const DEFAULT_DEGREES = [
     'Proyect Manager',
     'Maintenance Engineer'
 ];
+
+export const config_app = async() => {
+    await create_default_user_status();
+    await create_default_degrees();
+    await create_default_locations();
+    await create_default_code_number();
+    await create_default_socialnets();
+    return;
+}
+
+export const create_default_socialnets = async() => {
+    const rawData = await fs.readFileSync('social.json');
+    const socialnets = JSON.parse(rawData);
+    await socialnets.forEach(
+        async(socialnet_raw) => {
+            let socialnet_saved = await Socialnet.findOne({ name: socialnet_raw.name });
+            if (!socialnet_saved) {
+                socialnet_saved = new Socialnet({
+                    name: socialnet_raw.name,
+                    domain: socialnet_raw.domain,
+                    fontawesome: socialnet_raw.fontawesome
+                })
+                socialnet_saved = await socialnet_saved.save();
+                console.info('Red social: ' + socialnet_saved + 'was saved');
+            }
+        }
+    );
+    return;
+}
 
 export const create_default_user_status = async() => {
     DEFAULT_STATUS.forEach(async(status_label) => {

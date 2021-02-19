@@ -1,0 +1,21 @@
+[{
+        "name": "Facebook",
+        "domain": "https://www.facebook.com/",
+        "fontawesome": "fa-facebook"
+    },
+    {
+        "name": "Twitter",
+        "domain": "https://twitter.com/",
+        "fontawesome": "fa-twitter"
+    },
+    {
+        "name": "Github",
+        "domain": "https://github.com/",
+        "fontawesome": "fa-github"
+    },
+    {
+        "name": "Linkedlin",
+        "domain": "https://www.linkedin.com/",
+        "fontawesome": "fa-linkedin"
+    }
+]
