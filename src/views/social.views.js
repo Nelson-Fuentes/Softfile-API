@@ -50,3 +50,14 @@ export const get_socialnet_user_auth = async(request, response) => {
         response.status(500).json('Error en el servidor');
     }
 }
+
+export const delete_socialnet_user = async(request, response) => {
+    try {
+        const id = request.params.id;
+        const socialnet = await SocialController.delete_socialnet_user(id);
+        response.json(socialnet);
+    } catch (err) {
+        console.error(err);
+        response.status(500).json('Error en el servidor');
+    }
+}
