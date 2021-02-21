@@ -5,7 +5,7 @@ import * as SocialMiddelwares from '../../../middlewares/social.middleware';
 
 const router = Router();
 
-router.get('/default', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token], SocialViews.get_all_socialnets);
+router.get('/default', SocialViews.get_all_socialnets);
 router.post('', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token, SocialMiddelwares.verify_link_duplicated], SocialViews.create_socialnet_user_auth);
 router.put('/:id', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token, SocialMiddelwares.verify_link_duplicated, SocialMiddelwares.verify_socialnet_belongs_user_auth], SocialViews.update_social_user_auth);
 router.get('', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token], SocialViews.get_socialnet_user_auth);
