@@ -9,7 +9,7 @@ const PORT = process.env.SERVER_PORT;
 database_connection.then(async(db) => {
     console.log('Database ' + process.env.DATABASE_NAME + ' connected.');
     await AppConfig.config_app();
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT || PORT, () => {
         console.log('Server listen on port', PORT);
     })
 }).catch((error) => {
