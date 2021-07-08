@@ -10,4 +10,6 @@ router.put('/:id', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.v
 router.get('', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token], StudyCenterViews.get_study_center_user_auth);
 router.delete('/:id', [AuthMiddlewares.verify_a_token_was_sended, AuthMiddlewares.verify_token_expires, AuthMiddlewares.verify_user_from_token, StudyCenterMiddleware.verify_study_center_belongs_user_auth], StudyCenterViews.delete_study_center_user)
 
+
+
 export default router;
