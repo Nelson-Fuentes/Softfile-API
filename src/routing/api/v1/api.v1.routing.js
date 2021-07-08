@@ -7,6 +7,7 @@ import DegreeRoutes from './degree.routing';
 import LocationRoutes from './location.routing';
 import PhoneRoutes from './phone.routing'
 import SocialRoutes from './social.routing';
+import StudyCenterRoutes from './study.center.routing';
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.use('/degree', DegreeRoutes);
 router.use('/location', LocationRoutes);
 router.use('/phone', PhoneRoutes);
 router.use('/socialnet', SocialRoutes);
+router.use('/studycenter', StudyCenterRoutes);
 
 export default router;
